@@ -1,0 +1,7 @@
+*.pyc
+*~
+.*.sw?
+env/
+.eggs/
+*.egg-info/
+*.bak

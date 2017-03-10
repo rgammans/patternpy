@@ -1,0 +1,11 @@
+PatternPy
+=========
+
+A meta-library of reusable generators of python patterns.
+
+This libary is intended to be used to aid the DRY princicple by providing
+functions which return generated structured for the common pythonic patterns.
+
+I'm startuing with the registry pattern I seem to keep finding myself using,
+but I am more than happy to entertain pull requests for other patterns.
+
