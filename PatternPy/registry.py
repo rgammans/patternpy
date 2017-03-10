@@ -35,10 +35,17 @@ def NamedRegistry( name = "NewRegistry", base_meta = type ):
 
     Example:
    
+    #Python 2
     class ObjectTypes(object):
         __metaclass__ = NamedRegistry("ShapeRegistry")
         exclude_from_registry = True
         ...
+
+    #Python 3
+    class ObjectTypes(object, metaclass = NamedRegistry("ShapeRegistry")):
+        exclude_from_registry = True
+        ...
+
 
     """
     #Create a variable in the funciton closure for  new class.

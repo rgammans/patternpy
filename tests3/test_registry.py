@@ -22,13 +22,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
 import unittest
 import PatternPy.registry
 
 class DummyMeta(type):pass
-class DummyBase(object):
-    __metaclass__ = DummyMeta
+class DummyBase(object, metaclass = DummyMeta):pass
 
 class TestRegister(unittest.TestCase):
 
@@ -43,17 +41,14 @@ class TestRegister(unittest.TestCase):
         self.assertIsNot(reg1.REGISTRY,reg2.REGISTRY)
 
     def test_a_registry_is_valid_metaclass(self,):
-        class X(object):
-            __metaclass__  = PatternPy.registry.NamedRegistry()
+        class X(object, metaclass  = PatternPy.registry.NamedRegistry()): pass
 
     def test_a_registry_uses_specified_base_class(selfm):
-        class X(DummyBase):
-            __metaclass__  = PatternPy.registry.NamedRegistry(base_meta=DummyMeta)
+        class X(DummyBase , metaclass = PatternPy.registry.NamedRegistry(base_meta=DummyMeta)):pass
 
 
     def test_a_registry_records_all(self,):
-        class A(object):
-            __metaclass__  = PatternPy.registry.NamedRegistry()
+        class A(object, metaclass = PatternPy.registry.NamedRegistry()): pass
 
         class B(A):pass
 
@@ -67,8 +62,7 @@ class TestRegister(unittest.TestCase):
 
 
     def test_a_registry_records_subclasses_if_base_class_excluded(self,):
-        class A(object):
-            __metaclass__  = PatternPy.registry.NamedRegistry()
+        class A(object ,metaclass  = PatternPy.registry.NamedRegistry()):
             exclude_from_registry = True
 
         class B(A):pass
@@ -86,8 +80,7 @@ class TestRegister(unittest.TestCase):
     def test_a_registry_excluded_marked_subclasses(self,):
         # I'm not sure this is a particularly meaning full test 
         # compared tot the two above.
-        class A(object):
-            __metaclass__  = PatternPy.registry.NamedRegistry()
+        class A(object, metaclass = PatternPy.registry.NamedRegistry()):pass
 
         class B(A):
             exclude_from_registry = True
@@ -101,12 +94,10 @@ class TestRegister(unittest.TestCase):
             A.get_registered("B")
 
 
-
     def test_a_registry_handle_exclude_false_marking(self,):
         # I'm not sure this is a particularly meaning full test 
         # compared tot the two above.
-        class A(object):
-            __metaclass__  = PatternPy.registry.NamedRegistry()
+        class A(object, metaclass  = PatternPy.registry.NamedRegistry()):pass
 
         class B(A):
             exclude_from_registry = False
@@ -117,5 +108,6 @@ class TestRegister(unittest.TestCase):
         ##Blackbox
         self.assertEquals(A.get_registered("B"),B)
         self.assertEquals(A.get_registered("A"),A)
+
 
 
